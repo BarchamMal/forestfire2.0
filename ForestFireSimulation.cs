@@ -52,6 +52,7 @@ public sealed class ForestFireSimulation
                     Grid[x, y] = new CellState(CellType.Grass);
                 }
             }
+            Grid[x, y] = new CellState(CellType.Dirt);
         }
     }
 
