@@ -8,14 +8,20 @@ def load_sizes():
         lines = f.readlines()
     return [int(line.strip()) for line in lines if line.strip()]
 
-def bin_data(sizes, bin_size):
+def fast_load_sizes():
+    with open("c-sizes.txt", "r") as f:
+        lines = f.readlines()
+    return {int(i.split()[0]): int(i.split()[1]) for i in lines if i.strip()}
+
+def bin_data(counts, bin_size):
+    """Counts is a dict {size: frequency}"""
     if bin_size is None:
-        return Counter(sizes)
+        return counts
 
     buckets = {}
-    for size in sizes:
+    for size, count in counts.items():
         bucket = ((size - 1) // bin_size) * bin_size + 1 if size > 0 else 0
-        buckets[bucket] = buckets.get(bucket, 0) + 1
+        buckets[bucket] = buckets.get(bucket, 0) + count
     return buckets
 
 def concat():
@@ -27,8 +33,8 @@ def concat():
             f.write(f"{size} {counts[size]}\n")
 
 def graph(bin_size=None):
-    sizes = load_sizes()
-    counts = bin_data(sizes, bin_size)
+    counts = fast_load_sizes()
+    counts = bin_data(counts, bin_size)
 
     x = sorted(counts.keys())
     y = [counts[size] for size in x]
@@ -41,15 +47,15 @@ def graph(bin_size=None):
     plt.show()
 
 def p2g():
-    sizes = load_sizes()
+    counts = fast_load_sizes()
 
     buckets = {}
-    for size in sizes:
+    for size, count in counts.items():
         if size == 0:
             bucket = 0
         else:
             bucket = int(math.log2(size))
-        buckets[bucket] = buckets.get(bucket, 0) + 1
+        buckets[bucket] = buckets.get(bucket, 0) + count
 
     x = sorted(buckets.keys())
     y = [buckets[b] for b in x]
@@ -66,8 +72,8 @@ def p2g():
     plt.show()
 
 def log_graph(bin_size=None):
-    sizes = load_sizes()
-    counts = bin_data(sizes, bin_size)
+    counts = fast_load_sizes()
+    counts = bin_data(counts, bin_size)
 
     # Filter out size 0 since log(0) is undefined
     x = [s for s in sorted(counts.keys()) if s > 0]
