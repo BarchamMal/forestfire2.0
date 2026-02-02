@@ -1,0 +1,31 @@
+# Build directories
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userprefs
+*.ide
+
+# VS/VSCode stuff
+.vs/
+.vscode/
+
+# Rider
+.idea/
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Avalonia designer temporary files (if any)
+*.Designer.cs
+
+# NuGet packages
+*.nupkg
+fire-sizes.txt
+c-sizes.txt
