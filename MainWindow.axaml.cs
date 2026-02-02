@@ -54,13 +54,13 @@ public partial class MainWindow : Window
             {   
                 CellType.Charred => ((byte)33, (byte)14, (byte)8),
                 CellType.Dirt => ((byte)82, (byte)41, (byte)9),
-                CellType.Grass => ((byte)101, (byte)221, (byte)74),
-                CellType.Brush => ((byte)86, (byte)159, (byte)26),
-                CellType.Tree => ((byte)39, (byte)125, (byte)0),
+                CellType.Grass => ((byte)75, (byte)165, (byte)56),
+                CellType.Brush => ((byte)65, (byte)121, (byte)19),
+                CellType.Tree => ((byte)30, (byte)93, (byte)0),
                 CellType.ThickTree => ((byte)11, (byte)63, (byte)0),
                 CellType.Fire => (
                     (byte)255,
-                    (byte)(255 - MathF.Abs(cell.BurnTime / (float)Constants.FireLifeTime - 0.5f) * 2 * 80f),
+                    (byte)(255 - MathF.Abs(cell.BurnTime / (float)Constants.FireLifeTime - 0.5f) * 2 * 65f),
                     (byte)50
                 ),
                 _ => ((byte)0, (byte)0, (byte)0)
