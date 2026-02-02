@@ -40,4 +40,4 @@ The Python script, `analytics.py` is made to analyze this file, and display the 
 All the "commands" I've mentioned are argparse flags, and the script can be run as, for example:
 `python3 analytics.py -log -b 5`
 
-Enjoy the simulation and script, if you find any bugs, feel free to either make an [issue](/issues/new) or fork the repo, fix it yourself and make a pull request.
+Enjoy the simulation and script, if you find any bugs, feel free to either make an [issue](https://github.com/BarchamMal/forestfire2.0/issues) or fork the repo, fix it yourself and make a pull request.
