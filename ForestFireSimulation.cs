@@ -70,7 +70,7 @@ public sealed class ForestFireSimulation
             switch (cell.Type)
             {
                 case CellType.Charred:
-                    if (growthRandom < Constants.GrowthProbability / Constants.SecondaryGrowthProbability * 4 && !firePause)
+                    if (growthRandom < Constants.GrowthProbability / Constants.SecondaryGrowthProbability && !firePause)
                     {
                         _nextGrid[x, y] = new CellState(CellType.Dirt);
                     }
