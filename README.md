@@ -35,7 +35,9 @@ The Python script, `analytics.py` is made to analyze this file, and display the 
 2. `-graph`: is also a useful command. It opens up a graph, graphing the frequencies of the fires. You should expect to see a power curve, with a massive head and tail.
 3. `-p2g`: is much less useful, but still interesting. It opens up a graph, showing the frequency of fires in power of two bins, how many of size 1, 2 and 3, 4-8, 9-16, 17-32, 33-64, and so on. It is expected to look like (with smooth data, mine was 800k data points) a smooth graphu nera the top until you reach the middle of the graph on the x axis where it dips down to almost nothing and stays like that.
 4. `-log`: is also interesting, more so than `-p2g`. This command, or flag, creates a log log graph of the data, which tends to look like a straight donw-rightward slop with a hairy tail, which fades as data points grow.
-5. `-bin` or `-b`: is a flag used to bin data in `-graph` or `-log`. It is used with a number after it, being the size of each data bin. Though it smoothes out the data when data points are few, it also skews the data in odd ways, so be wary using it.
+5. `--bin` or `--b`: is a flag used to bin data in `-graph`, `-log` or `-totalburned`. It is used with a number after it, being the size of each data bin. Though it smoothes out the data when data points are few, it also skews the data in odd ways, so be wary using it.
+6. `-majority` and `-fp`: is a flag used to see what size and higher, fires, acount for what percent of trees burnt. `-fp` or `--firepercent` is used to set the percentage you wish to check. The `-fp` percentage should be given in a 0-1 float form.
+7. `-totalburned`: is a flag used to display a graph of the total number of trees burned per fire size.
 
 All the "commands" I've mentioned are argparse flags, and the script can be run as, for example:
 `python3 analytics.py -log -b 5`

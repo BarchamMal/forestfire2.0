@@ -89,13 +89,49 @@ def log_graph(bin_size=None):
     plt.title("Log-Log Fire Size Distribution")
     plt.show()
 
+def fireMajority(percent=0):
+    """Counts the fires backwards until it reaches percent % of
+    the total trees burned, at which time it stops and prints,
+    that the fire sizes from here and above represent the total
+    percent % of all fires."""
+    counts = fast_load_sizes()
+    total_burned = sum(size * count for size, count in counts.items())
+    target = total_burned * percent
+
+    cumulative = 0
+    for size in sorted(counts.keys(), reverse=True):
+        count = counts[size]
+        cumulative += size * count
+        if cumulative >= target:
+            print(f"Fires of size {size} and larger represent {percent*100}% of all trees burned,")
+            print(f"accounting for {cumulative} out of {total_burned} trees burned.")
+            break
+
+def totalBurned(bin_size=None):
+    """Creates a graph comaparing the total number of trees burned
+    by all fires of the size ever burnt. (y axis) vs the fire size (x axis)."""
+    counts = fast_load_sizes()
+    counts = bin_data(counts, bin_size)
+    x = sorted(counts.keys())
+    y = [size * counts[size] for size in x]
+
+    plt.figure()
+    plt.plot(x, y)
+    plt.xlabel("Fire Size")
+    plt.ylabel("Total Trees Burned by Fires of this Size")
+    plt.title("Total Trees Burned vs Fire Size")
+    plt.show()
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-concat", action="store_true")
     parser.add_argument("-graph", action="store_true")
     parser.add_argument("-p2g", action="store_true")
     parser.add_argument("-log", action="store_true")
-    parser.add_argument("-b", "--bin", type=int, default=None)
+    parser.add_argument("--bin", "-b", type=int, default=None)
+    parser.add_argument("-majority", action="store_true")
+    parser.add_argument("--firepercent", "-fp", type=float, default=0.9)
+    parser.add_argument("-totalburned", action="store_true")
     args = parser.parse_args()
 
     if args.concat:
@@ -106,3 +142,7 @@ if __name__ == "__main__":
         p2g()
     if args.log:
         log_graph(args.bin)
+    if args.majority:
+        fireMajority(args.firepercent)
+    if args.totalburned:
+        totalBurned(args.bin)
